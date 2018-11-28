@@ -1,0 +1,28 @@
+version: 2.1
+description: |
+  Minimal orb example. https://github.com/ks888/helloworld-orb
+
+examples:
+  hello-world:
+    description: Say 'Hello world'
+    usage:
+      version: 2.1
+      orbs:
+        greeting: ks888/greeting@0.1.0
+      jobs:
+        build:
+          docker:
+            - image: circleci/python:2.7
+          steps:
+            - greeting/hello:
+                message: "world"
+
+commands:
+  hello:
+    description: Say hello
+    parameters:
+      message:
+        description: Your message
+        type: string
+    steps:
+      - run: echo "Hello << parameters.message >>"
